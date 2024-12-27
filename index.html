@@ -22,7 +22,7 @@
     }
     .guy {
       position: absolute;
-      top: 180px; /* Начальная позиция чуть ниже перекладины */
+      top: 120px; /* Начальная позиция: вплотную к перекладине */
       left: 50%;
       transform: translate(-50%, 0);
       width: 50px;
@@ -38,20 +38,19 @@
 
   <script>
     const guy = document.querySelector('.guy');
-    const barY = 100 + 20 - 100; // Позиция перекладины минус высота парня (чтобы соприкасались)
-    const startY = 180; // Начальная позиция парня
+    const barY = 120; // Кубик вплотную к перекладине
+    const startY = 120; // Начальная позиция совпадает с barY
     let guyY = startY;
 
     // Обработчик прокрутки
     document.addEventListener('wheel', (event) => {
       if (event.deltaY < 0) {
-        // Прокрутка вверх - подтягивание
-        guyY -= 20; 
-        if (guyY < barY) guyY = barY; // Ограничение: вплотную к перекладине
+        // Прокрутка вверх - остаётся на месте (уже на перекладине)
+        guyY = barY;
       } else {
         // Прокрутка вниз - опускание
-        guyY += 20; 
-        if (guyY > startY) guyY = startY; // Ограничение: начальная позиция
+        guyY += 20;
+        if (guyY > 400) guyY = 400; // Ограничение вниз
       }
       guy.style.transform = `translate(-50%, ${guyY}px)`;
     });
