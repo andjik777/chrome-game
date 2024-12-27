@@ -13,7 +13,7 @@
     }
     .bar {
       position: absolute;
-      top: 50px;
+      top: 100px; /* Перекладина чуть ниже верха экрана */
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
@@ -22,7 +22,7 @@
     }
     .guy {
       position: absolute;
-      top: 400px; /* Начальная позиция */
+      top: 400px; /* Начальная позиция парня */
       left: 50%;
       transform: translate(-50%, 0);
       width: 50px;
@@ -38,11 +38,11 @@
 
   <script>
     const guy = document.querySelector('.guy');
-    const barY = 70; // Позиция перекладины (50px высота + 20px за турник)
+    const barY = 100 + 20; // Верх перекладины + высота перекладины
     const startY = 400; // Начальная позиция парня
     let guyY = startY;
 
-    // Отслеживание события прокрутки колёсика мыши
+    // Обработчик события прокрутки колёсика
     document.addEventListener('wheel', (event) => {
       if (event.deltaY < 0) {
         // Прокрутка вверх - подтягивание
