@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Подтягивания</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #87ceeb;
+    }
+    .bar {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 20px;
+      background: brown;
+    }
+    .guy {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 50px;
+      height: 100px;
+      background: #ffa500;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bar"></div>
+  <div class="guy"></div>
+
+  <script>
+    const guy = document.querySelector('.guy');
+    let guyY = 80; // стартовая позиция
+
+    document.addEventListener('mousemove', (event) => {
+      const y = event.clientY;
+      guyY = Math.max(80, y - 150); // ограничение снизу (80px)
+      guy.style.transform = `translate(-50%, ${guyY}px)`;
+    });
+  </script>
+</body>
+</html>
