@@ -9,6 +9,7 @@
       margin: 0;
       overflow: hidden;
       background-color: #87ceeb;
+      height: 100vh;
     }
     .bar {
       position: absolute;
@@ -21,7 +22,7 @@
     }
     .guy {
       position: absolute;
-      top: 200px;
+      top: 400px; /* Начальная позиция */
       left: 50%;
       transform: translate(-50%, 0);
       width: 50px;
@@ -37,12 +38,21 @@
 
   <script>
     const guy = document.querySelector('.guy');
-    let guyY = 200; // стартовая позиция парня
+    const barY = 70; // Позиция перекладины (50px высота + 20px за турник)
+    const startY = 400; // Начальная позиция парня
+    let guyY = startY;
 
     // Отслеживание события прокрутки колёсика мыши
     document.addEventListener('wheel', (event) => {
-      guyY += event.deltaY > 0 ? 10 : -10; // Прокрутка вниз опускает, вверх поднимает
-      guyY = Math.max(80, Math.min(guyY, window.innerHeight - 100)); // Ограничения движения
+      if (event.deltaY < 0) {
+        // Прокрутка вверх - подтягивание
+        guyY -= 20; 
+        if (guyY < barY) guyY = barY; // Ограничение на уровне перекладины
+      } else {
+        // Прокрутка вниз - опускание
+        guyY += 20; 
+        if (guyY > startY) guyY = startY; // Ограничение на уровне начальной позиции
+      }
       guy.style.transform = `translate(-50%, ${guyY}px)`;
     });
   </script>
