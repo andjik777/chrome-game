@@ -21,7 +21,7 @@
     }
     .guy {
       position: absolute;
-      top: 80px;
+      top: 200px;
       left: 50%;
       transform: translate(-50%, 0);
       width: 50px;
@@ -37,11 +37,12 @@
 
   <script>
     const guy = document.querySelector('.guy');
-    let guyY = 80; // стартовая позиция
+    let guyY = 200; // стартовая позиция парня
 
-    document.addEventListener('mousemove', (event) => {
-      const y = event.clientY;
-      guyY = Math.max(80, y - 150); // ограничение снизу (80px)
+    // Отслеживание события прокрутки колёсика мыши
+    document.addEventListener('wheel', (event) => {
+      guyY += event.deltaY > 0 ? 10 : -10; // Прокрутка вниз опускает, вверх поднимает
+      guyY = Math.max(80, Math.min(guyY, window.innerHeight - 100)); // Ограничения движения
       guy.style.transform = `translate(-50%, ${guyY}px)`;
     });
   </script>
